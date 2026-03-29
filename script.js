@@ -73,7 +73,7 @@ let moodFallbackTimer   = null;
 let moodAfterGrowTimer  = null;
 
 /** Hold on last wink frame + visible welcomeback.svg before mood-select */
-const WELCOME_HOLD_AFTER_MS = 2000;
+const WELCOME_HOLD_AFTER_MS = 2500;
 /** BloomBuddy at bottom fades in, then welcome-back art */
 const WELCOME_BRAND_BEFORE_TEXT_MS = 480;
 
