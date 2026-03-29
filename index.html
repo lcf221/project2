@@ -4,119 +4,216 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Mood Tracker</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/utn8nkz.css">
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <div id="app">
 
       <!-- ══════════════════════════════════════════
-           SCREEN 1 · WELCOME  (auto-advance 5s)
+           SCREEN 1 · WELCOME  (wink.json once → hold → text → mood select)
+           Background: #FFF5EA
       ══════════════════════════════════════════ -->
       <div class="screen active" id="screen-welcome">
-        <img src="assets/welcome.png" alt="Welcome Back!" class="full-img">
-        <div class="splash-countdown" id="splash-bar"></div>
+        <div class="welcome-hero">
+          <div class="welcome-stack">
+            <div class="welcome-text-wrap" id="welcome-text-wrap" aria-hidden="true">
+              <img class="wl-text-img" src="assets/welcomeback.svg"
+                   width="235" height="182"
+                   alt="Welcome back, Abigail" decoding="async">
+            </div>
+            <div class="welcome-wink" id="welcome-wink" aria-hidden="true"></div>
+          </div>
+        </div>
       </div>
 
       <!-- ══════════════════════════════════════════
            SCREEN 2 · MOOD SELECTION
+           Title: assets/feelingtoday.svg · Still: json3 · Hover: wiggle → face-*.js
       ══════════════════════════════════════════ -->
       <div class="screen" id="screen-mood-select">
-        <div class="img-wrapper">
-          <img src="assets/mood-select.png" alt="How are you feeling today?" class="full-img">
+        <img class="ms-title-img" src="assets/feelingtoday.svg"
+             width="261" height="263"
+             alt="How are you feeling today?" decoding="async">
 
-          <!--
-            Transparent buttons sit on top of each plant character.
-            Toggle SHOW_DEBUG in script.js to see their outlines.
-          -->
-          <button class="plant-btn mood-happy"    data-mood="happy"    aria-label="Happy"></button>
-          <button class="plant-btn mood-sad"      data-mood="sad"      aria-label="Sad"></button>
-          <button class="plant-btn mood-meh"      data-mood="meh"      aria-label="Meh"></button>
-          <button class="plant-btn mood-stressed" data-mood="stressed" aria-label="Stressed"></button>
-          <button class="plant-btn mood-angry"    data-mood="angry"    aria-label="Angry"></button>
-
-          <!-- Covers the static date in the PNG and shows today's real date -->
-          <div class="date-overlay">
-            <span class="date-label">TODAY IS:</span>
-            <span class="date-value" id="current-date"></span>
-          </div>
+        <div class="ms-stage">
+          <button type="button" class="mood-face-btn ms-happy" data-mood="happy" aria-label="Happy">
+            <span class="mood-face-still" aria-hidden="true"></span>
+            <span class="mood-face-wiggle" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="mood-face-btn ms-sad" data-mood="sad" aria-label="Sad">
+            <span class="mood-face-still" aria-hidden="true"></span>
+            <span class="mood-face-wiggle" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="mood-face-btn ms-meh" data-mood="meh" aria-label="Meh">
+            <span class="mood-face-still" aria-hidden="true"></span>
+            <span class="mood-face-wiggle" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="mood-face-btn ms-stressed" data-mood="stressed" aria-label="Stressed">
+            <span class="mood-face-still" aria-hidden="true"></span>
+            <span class="mood-face-wiggle" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="mood-face-btn ms-angry" data-mood="angry" aria-label="Angry">
+            <span class="mood-face-still" aria-hidden="true"></span>
+            <span class="mood-face-wiggle" aria-hidden="true"></span>
+          </button>
         </div>
+
+        <footer class="ms-date">
+          <span class="ms-date-label">TODAY IS:</span>
+          <span class="ms-date-value" id="current-date"></span>
+        </footer>
       </div>
 
       <!-- ══════════════════════════════════════════
            SCREENS 3–7 · INDIVIDUAL MOOD SCREENS
-           Each auto-advances to the calendar (3s).
-           Tapping also advances immediately.
+           Text: assets/outlines/*.svg (position ref: happy.png / sad.png / …)
+           Grow Lottie (full play + 1 s hold), then calendar — see script.js
       ══════════════════════════════════════════ -->
       <div class="screen mood-screen" id="screen-happy">
-        <img src="assets/happy.png" alt="I am feeling Happy" class="full-img">
-        <div class="tap-hint">Tap to continue</div>
+        <div class="mood-page">
+          <img class="mood-page-text-img" src="assets/outlines/happy.svg"
+               width="261" height="263" alt="I am feeling… Happy" decoding="async">
+          <div class="mood-grow-lottie" aria-hidden="true">
+            <div class="mood-grow-scaler">
+              <div class="mood-grow-inner"></div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="screen mood-screen" id="screen-sad">
-        <img src="assets/sad.png" alt="I am feeling Sad" class="full-img">
-        <div class="tap-hint">Tap to continue</div>
+        <div class="mood-page">
+          <img class="mood-page-text-img" src="assets/outlines/sad.svg"
+               width="261" height="263" alt="I am feeling… Sad" decoding="async">
+          <div class="mood-grow-lottie" aria-hidden="true">
+            <div class="mood-grow-scaler">
+              <div class="mood-grow-inner"></div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="screen mood-screen" id="screen-meh">
-        <img src="assets/meh.png" alt="I am feeling Meh" class="full-img">
-        <div class="tap-hint">Tap to continue</div>
+        <div class="mood-page">
+          <img class="mood-page-text-img" src="assets/outlines/meh.svg"
+               width="261" height="263" alt="I am feeling… Meh" decoding="async">
+          <div class="mood-grow-lottie" aria-hidden="true">
+            <div class="mood-grow-scaler">
+              <div class="mood-grow-inner"></div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="screen mood-screen" id="screen-stressed">
-        <img src="assets/stressed.png" alt="I am feeling Stressed" class="full-img">
-        <div class="tap-hint">Tap to continue</div>
+        <div class="mood-page">
+          <img class="mood-page-text-img" src="assets/outlines/stressed.svg"
+               width="261" height="263" alt="I am feeling… Stressed" decoding="async">
+          <div class="mood-grow-lottie" aria-hidden="true">
+            <div class="mood-grow-scaler">
+              <div class="mood-grow-inner"></div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="screen mood-screen" id="screen-angry">
-        <img src="assets/angry.png" alt="I am feeling Angry" class="full-img">
-        <div class="tap-hint">Tap to continue</div>
+        <div class="mood-page">
+          <img class="mood-page-text-img" src="assets/outlines/angry.svg"
+               width="261" height="263" alt="I am feeling… Angry" decoding="async">
+          <div class="mood-grow-lottie" aria-hidden="true">
+            <div class="mood-grow-scaler">
+              <div class="mood-grow-inner"></div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- ══════════════════════════════════════════
            SCREEN 8 · MONTHLY CALENDAR
+           Outer bg = today’s mood color (JS). Icons: assets/Icons/
       ══════════════════════════════════════════ -->
       <div class="screen" id="screen-calendar">
-        <div class="toolbar">
-          <button class="tb-nav" id="cal-prev" aria-label="Previous month">&#10094;</button>
-          <div class="tb-icons">
-            <button class="tb-icon-btn" id="tb-pencil-cal"    title="Log today's mood">&#9998;</button>
-            <button class="tb-icon-btn" id="tb-cal-to-tracker" title="Year view">&#9783;</button>
-            <button class="tb-icon-btn tb-active"              title="Month view">&#9776;</button>
+        <header class="cal-nav-bar">
+          <button type="button" class="cal-nav-btn" id="cal-prev" aria-label="Previous month">
+            <img src="assets/Icons/left.svg" alt="" class="cal-nav-icon">
+          </button>
+          <div class="cal-nav-cluster">
+            <button type="button" class="cal-nav-btn" id="tb-cal-to-tracker" aria-label="Year view" title="Year view">
+              <img src="assets/Icons/year.svg" alt="" class="cal-nav-icon">
+            </button>
+            <button type="button" class="cal-nav-btn" id="tb-flower-cal" aria-label="Choose mood" title="Choose mood">
+              <img src="assets/Icons/flower.svg" alt="" class="cal-nav-icon">
+            </button>
           </div>
-          <button class="tb-nav" id="cal-next" aria-label="Next month">&#10095;</button>
+          <button type="button" class="cal-nav-btn" id="cal-next" aria-label="Next month">
+            <img src="assets/Icons/right.svg" alt="" class="cal-nav-icon">
+          </button>
+        </header>
+        <div class="cal-card">
+          <div id="calendar-body"></div>
         </div>
-        <div id="calendar-body"></div>
       </div>
 
       <!-- ══════════════════════════════════════════
            SCREEN 9 · YEARLY TRACKER
+           Same nav icons + mood colors as month screen (JS)
       ══════════════════════════════════════════ -->
       <div class="screen" id="screen-tracker">
-        <div class="toolbar">
-          <button class="tb-nav" id="yr-prev" aria-label="Previous year">&#10094;</button>
-          <div class="tb-icons">
-            <button class="tb-icon-btn" id="tb-pencil-tracker"  title="Log today's mood">&#9998;</button>
-            <button class="tb-icon-btn tb-active"               title="Year view">&#9783;</button>
-            <button class="tb-icon-btn" id="tb-tracker-to-cal" title="Month view">&#9776;</button>
+        <header class="cal-nav-bar">
+          <button type="button" class="cal-nav-btn" id="yr-prev" aria-label="Previous month">
+            <img src="assets/Icons/left.svg" alt="" class="cal-nav-icon">
+          </button>
+          <div class="cal-nav-cluster">
+            <button type="button" class="cal-nav-btn" id="tb-tracker-to-cal" aria-label="Month view" title="Month view">
+              <img src="assets/Icons/year.svg" alt="" class="cal-nav-icon">
+            </button>
+            <button type="button" class="cal-nav-btn" id="tb-flower-tracker" aria-label="Choose mood" title="Choose mood">
+              <img src="assets/Icons/flower.svg" alt="" class="cal-nav-icon">
+            </button>
           </div>
-          <button class="tb-nav" id="yr-next" aria-label="Next year">&#10095;</button>
-        </div>
+          <button type="button" class="cal-nav-btn" id="yr-next" aria-label="Next month">
+            <img src="assets/Icons/right.svg" alt="" class="cal-nav-icon">
+          </button>
+        </header>
 
         <div id="tracker-body"></div>
 
         <!-- Mood legend at the bottom -->
         <div class="legend">
-          <div class="legend-item"><span class="legend-dot" style="background:#e8d878"></span>Happy</div>
-          <div class="legend-item"><span class="legend-dot" style="background:#7ab8d8"></span>Sad</div>
-          <div class="legend-item"><span class="legend-dot" style="background:#c4a8d8"></span>Meh</div>
-          <div class="legend-item"><span class="legend-dot" style="background:#e07858"></span>Stressed</div>
-          <div class="legend-item"><span class="legend-dot" style="background:#7fb87f"></span>Angry</div>
+          <div class="legend-item"><span class="legend-dot" style="background:rgba(255, 214, 67, 1)"></span>Happy</div>
+          <div class="legend-item"><span class="legend-dot" style="background:rgba(142, 196, 255, 1)"></span>Sad</div>
+          <div class="legend-item"><span class="legend-dot" style="background:rgba(250, 162, 255, 1)"></span>Meh</div>
+          <div class="legend-item"><span class="legend-dot" style="background:rgba(255, 142, 98, 1)"></span>Stressed</div>
+          <div class="legend-item"><span class="legend-dot" style="background:rgba(147, 239, 118, 1)"></span>Angry</div>
         </div>
       </div>
 
     </div><!-- /#app -->
+    <!-- Animation data as global JS variables — works with file:// and http:// -->
+    <script src="assets/js/anim/face-still-happy.js"></script>
+    <script src="assets/js/anim/face-still-sad.js"></script>
+    <script src="assets/js/anim/face-still-meh.js"></script>
+    <script src="assets/js/anim/face-still-stressed.js"></script>
+    <script src="assets/js/anim/face-still-angry.js"></script>
+    <script src="assets/js/anim/face-happy.js"></script>
+    <script src="assets/js/anim/face-sad.js"></script>
+    <script src="assets/js/anim/face-meh.js"></script>
+    <script src="assets/js/anim/face-stressed.js"></script>
+    <script src="assets/js/anim/face-angry.js"></script>
+    <script src="assets/js/anim/sway-happy.js"></script>
+    <script src="assets/js/anim/sway-sad.js"></script>
+    <script src="assets/js/anim/sway-meh.js"></script>
+    <script src="assets/js/anim/sway-stressed.js"></script>
+    <script src="assets/js/anim/sway-angry.js"></script>
+    <script src="assets/js/anim/grow-happy.js"></script>
+    <script src="assets/js/anim/grow-sad.js"></script>
+    <script src="assets/js/anim/grow-meh.js"></script>
+    <script src="assets/js/anim/grow-stressed.js"></script>
+    <script src="assets/js/anim/grow-angry.js"></script>
+    <!-- lottie-web renderer -->
+    <script src="assets/js/lottie.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
