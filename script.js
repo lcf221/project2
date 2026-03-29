@@ -1,8 +1,8 @@
 /* ════════════════════════════════════════════════════════════
-   MOOD TRACKER  ·  script.js
+   BloomBuddy  ·  script.js
    ────────────────────────────────────────────────────────────
    Flow:
-     Welcome (wink.json once → hold → welcome text → Mood Selection) →
+     Welcome (wink → BloomBuddy → welcome text → Mood Selection) →
      Mood Screen (Grow once + 1 s hold) → Monthly Calendar  ←→  Yearly Tracker
 ════════════════════════════════════════════════════════════ */
 
@@ -74,6 +74,8 @@ let moodAfterGrowTimer  = null;
 
 /** Hold on last wink frame + visible welcomeback.svg before mood-select */
 const WELCOME_HOLD_AFTER_MS = 2000;
+/** BloomBuddy at bottom fades in, then welcome-back art */
+const WELCOME_BRAND_BEFORE_TEXT_MS = 480;
 
 function finishWelcomeIntro() {
   if (welcomeSequenceDone) return;
@@ -89,19 +91,37 @@ function finishWelcomeIntro() {
     } catch (e) { /* ignore */ }
   }
 
-  const textWrap = document.getElementById('welcome-text-wrap');
-  if (textWrap) {
-    textWrap.classList.add('is-visible');
-    textWrap.setAttribute('aria-hidden', 'false');
+  const brand = document.getElementById('welcome-brand');
+  if (brand) {
+    brand.classList.add('is-visible');
+    brand.setAttribute('aria-hidden', 'false');
   }
 
   setTimeout(() => {
-    showScreen('screen-mood-select', refreshDateDisplay);
-  }, WELCOME_HOLD_AFTER_MS);
+    const textWrap = document.getElementById('welcome-text-wrap');
+    if (textWrap) {
+      textWrap.classList.add('is-visible');
+      textWrap.setAttribute('aria-hidden', 'false');
+    }
+
+    setTimeout(() => {
+      showScreen('screen-mood-select', refreshDateDisplay);
+    }, WELCOME_HOLD_AFTER_MS);
+  }, WELCOME_BRAND_BEFORE_TEXT_MS);
 }
 
 function initWelcomeWink() {
   welcomeSequenceDone = false;
+  const brand = document.getElementById('welcome-brand');
+  if (brand) {
+    brand.classList.remove('is-visible');
+    brand.setAttribute('aria-hidden', 'true');
+  }
+  const textWrapReset = document.getElementById('welcome-text-wrap');
+  if (textWrapReset) {
+    textWrapReset.classList.remove('is-visible');
+    textWrapReset.setAttribute('aria-hidden', 'true');
+  }
   const host = document.getElementById('welcome-wink');
   if (!host || typeof lottie === 'undefined') {
     finishWelcomeIntro();

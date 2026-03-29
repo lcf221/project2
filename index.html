@@ -3,7 +3,16 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Mood Tracker</title>
+    <meta name="theme-color" content="#FFF5EA">
+    <title>BloomBuddy</title>
+    <!-- assets/favicon_io — all generated sizes -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon_io/android-chrome-512x512.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon_io/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon_io/favicon-16x16.png">
+    <link rel="icon" href="assets/favicon_io/favicon.ico">
+    <link rel="manifest" href="assets/favicon_io/site.webmanifest">
     <link rel="stylesheet" href="https://use.typekit.net/utn8nkz.css">
     <link rel="stylesheet" href="style.css">
   </head>
@@ -11,7 +20,7 @@
     <div id="app">
 
       <!-- ══════════════════════════════════════════
-           SCREEN 1 · WELCOME  (wink.json once → hold → text → mood select)
+           SCREEN 1 · WELCOME  (wink → BloomBuddy → welcome text → mood select)
            Background: #FFF5EA
       ══════════════════════════════════════════ -->
       <div class="screen active" id="screen-welcome">
@@ -24,6 +33,7 @@
             </div>
             <div class="welcome-wink" id="welcome-wink" aria-hidden="true"></div>
           </div>
+          <p class="welcome-brand" id="welcome-brand" aria-hidden="true">BloomBuddy</p>
         </div>
       </div>
 

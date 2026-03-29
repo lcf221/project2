@@ -178,6 +178,30 @@ textarea {
   height: 100% !important;
 }
 
+/* App name — bottom of welcome; fades in before “Welcome back” art (Hey Eloise / Typekit) */
+.welcome-brand {
+  position: absolute;
+  left: 50%;
+  bottom: max(env(safe-area-inset-bottom, 0px), 22px);
+  transform: translateX(-50%) translateY(12px);
+  margin: 0;
+  z-index: 3;
+  font-family: var(--font-app);
+  font-size: clamp(1.6rem, 5.2vmin, 2rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: #5c443c;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.welcome-brand.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 /* Mood-select title — left side, curves toward the sunflower cluster */
 .ms-title-img {
   position: absolute;
