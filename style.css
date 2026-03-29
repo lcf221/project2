@@ -44,8 +44,24 @@ textarea {
   width: min(100vw, 430px);
   height: 100vh;
   overflow: hidden;
-  background: #fdf0e2;
+  background: #FFF5EA;
   font-family: var(--font-app);
+}
+
+/*
+  Cream strip over the status-bar / notch only (does not shrink #app — keeps vmin % layouts stable).
+  Mood-tinted screens still paint full size underneath; this covers them in the system UI band.
+*/
+#app::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: env(safe-area-inset-top, 0px);
+  background: #FFF5EA;
+  z-index: 100;
+  pointer-events: none;
 }
 
 /* Lets the welcome Lottie scale up without clipping at the phone edges */
@@ -821,7 +837,7 @@ textarea {
 
 .tracker-data-row {
   display: grid;
-  grid-template-columns: minmax(0.85rem, 1.35rem) repeat(12, minmax(0, 1fr));
+  grid-template-columns: minmax(1.05rem, 1.65rem) repeat(12, minmax(0, 1fr));
   gap: 0;
   align-items: stretch;
   min-height: 0;
@@ -846,7 +862,7 @@ textarea {
 .tracker-month-header {
   text-align: center;
   font-family: var(--font-app);
-  font-size: clamp(0.58rem, 1.85vmin, 0.92rem);
+  font-size: clamp(0.72rem, 2.35vmin, 1.05rem);
   font-weight: 400;
   color: #2a1a0a;
   line-height: 1;
@@ -859,7 +875,7 @@ textarea {
 
 .tracker-day-label {
   font-family: var(--font-app);
-  font-size: clamp(0.42rem, 1.35vmin, 0.68rem);
+  font-size: clamp(0.62rem, 2.05vmin, 0.95rem);
   font-weight: 400;
   color: #2a1a0a;
   text-align: center;
@@ -923,7 +939,7 @@ textarea {
   display: flex;
   align-items: center;
   gap: 3px;
-  font-size: clamp(0.55rem, 1.9vw, 0.72rem);
+  font-size: clamp(0.62rem, 2.1vw, 0.82rem);
   color: #5c3510;
   font-weight: 600;
 }
