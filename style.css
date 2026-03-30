@@ -991,3 +991,70 @@ textarea {
     max-width: 78px;
   }
 }
+
+/* ════════════════════════════════════════════════════════════
+   CLOUD SYNC  (Supabase — see supabase-schema.sql)
+════════════════════════════════════════════════════════════ */
+.sync-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  padding: 8px 10px max(8px, env(safe-area-inset-bottom, 0px));
+  background: rgba(255, 245, 234, 0.98);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  font-family: var(--font-app);
+  font-size: clamp(0.65rem, 2.6vw, 0.8rem);
+  color: #5c443c;
+  box-sizing: border-box;
+  pointer-events: auto;
+}
+
+.sync-bar-label {
+  margin: 0 0 6px;
+  line-height: 1.25;
+}
+
+.sync-bar-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.sync-btn {
+  font-family: var(--font-app);
+  font-size: inherit;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(92, 68, 60, 0.35);
+  background: #fff;
+  color: #3d2818;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sync-btn:active {
+  transform: scale(0.98);
+}
+
+.sync-btn--ghost {
+  background: transparent;
+}
+
+.sync-email {
+  flex: 1 1 120px;
+  min-width: 0;
+  max-width: 100%;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(92, 68, 60, 0.3);
+  font-family: var(--font-app);
+  font-size: inherit;
+}
+
+#app:has(#sync-bar) #screen-calendar,
+#app:has(#sync-bar) #screen-tracker {
+  padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+}

@@ -236,8 +236,10 @@ let currentMood   = null;
 let calendarDate  = new Date();   // month currently shown in calendar
 
 /* ════════════════════════════════════════════════════════════
-   DATA  –  localStorage helpers
+   DATA  –  localStorage helpers  (+ optional cloud sync in assets/js/sync.js)
 ════════════════════════════════════════════════════════════ */
+window.BloomBuddy = window.BloomBuddy || { onMoodSaved: null };
+
 function getMoodData() {
   try { return JSON.parse(localStorage.getItem('moodData') || '{}'); }
   catch { return {}; }
@@ -246,7 +248,16 @@ function getMoodData() {
 function saveMoodForDate(dateStr, mood) {
   const data = getMoodData();
   data[dateStr] = mood;
-  localStorage.setItem('moodData', JSON.stringify(data));
+  try {
+    localStorage.setItem('moodData', JSON.stringify(data));
+  } catch (e) {
+    console.warn('[BloomBuddy] Could not save mood for', dateStr, e);
+  }
+  try {
+    window.BloomBuddy.onMoodSaved?.(dateStr, mood);
+  } catch (e) {
+    console.warn('[BloomBuddy] sync hook', e);
+  }
 }
 
 function getMoodForDate(dateStr) {
@@ -269,7 +280,22 @@ function daysInMonth(year, month) {
   return new Date(year, month + 1, 0).getDate();
 }
 
-/** Fill Jan 1 → today (current year) with random moods only where no entry exists — persists in moodData. */
+/** Stable “demo” mood for a date (same string → same mood every time). Never overwrites real user picks. */
+function demoMoodForDate(dateStr) {
+  const moodKeys = Object.keys(MOODS);
+  if (moodKeys.length === 0) return null;
+  let h = 0;
+  for (let i = 0; i < dateStr.length; i++) {
+    h = ((h << 5) - h) + dateStr.charCodeAt(i);
+    h |= 0;
+  }
+  return moodKeys[Math.abs(h) % moodKeys.length];
+}
+
+/**
+ * Fill Jan 1 → yesterday (current year) with demo moods only where no entry exists — persists once.
+ * Skips today so today is never auto-filled; only selectMood() writes today’s real pick.
+ */
 function seedMissingMoodsYearToDate() {
   const data = getMoodData();
   const moodKeys = Object.keys(MOODS);
@@ -277,21 +303,30 @@ function seedMissingMoodsYearToDate() {
 
   const now = new Date();
   const year = now.getFullYear();
+  const today = todayStr();
   const end = new Date(year, now.getMonth(), now.getDate());
   const cursor = new Date(year, 0, 1);
   let changed = false;
 
   while (cursor <= end) {
     const dateStr = formatDateStr(cursor);
+    if (dateStr === today) {
+      cursor.setDate(cursor.getDate() + 1);
+      continue;
+    }
     if (!data[dateStr]) {
-      data[dateStr] = moodKeys[Math.floor(Math.random() * moodKeys.length)];
+      data[dateStr] = demoMoodForDate(dateStr);
       changed = true;
     }
     cursor.setDate(cursor.getDate() + 1);
   }
 
   if (changed) {
-    localStorage.setItem('moodData', JSON.stringify(data));
+    try {
+      localStorage.setItem('moodData', JSON.stringify(data));
+    } catch (e) {
+      console.warn('[BloomBuddy] Could not save moodData', e);
+    }
   }
 }
 
@@ -791,6 +826,17 @@ function initTracker() {
   });
 }
 
+/** After cloud pull — re-seed demo gaps, refresh tints, redraw visible cal/tracker */
+function refreshMoodViewsAfterSync() {
+  seedMissingMoodsYearToDate();
+  applyTodayMoodThemeToCalAndTracker();
+  if (document.getElementById('screen-calendar')?.classList.contains('active')) renderCalendar();
+  if (document.getElementById('screen-tracker')?.classList.contains('active')) renderTracker();
+}
+
+window.BloomBuddy.refreshMoodViewsAfterSync = refreshMoodViewsAfterSync;
+window.BloomBuddy.getMoodData = getMoodData;
+
 /* ════════════════════════════════════════════════════════════
    BOOT
 ════════════════════════════════════════════════════════════ */
@@ -810,4 +856,8 @@ document.addEventListener('DOMContentLoaded', () => {
   refreshDateDisplay();
 
   initWelcomeWink();
+
+  import('./assets/js/sync.js')
+    .then(m => m.initBloomSync?.())
+    .catch(() => { /* optional module / no config */ });
 });
