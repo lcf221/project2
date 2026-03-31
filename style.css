@@ -251,7 +251,7 @@ textarea {
   bottom: -4%;
   right: -5%;
   left: auto;
-  width: 72%;
+  width: 75%;
   z-index: 4;
 }
 
@@ -362,6 +362,10 @@ textarea {
 @media (max-width: 430px) {
   .ms-stressed {
     width: 69%;
+  }
+
+  .ms-sad {
+    left: -13%;
   }
 
   .ms-date-label {
