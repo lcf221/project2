@@ -259,10 +259,10 @@ textarea {
 
 .ms-angry {
   top: auto;
-  bottom: -8%;
-  right: -5%;
+  bottom: -4%;
+  right: -12%;
   left: auto;
-  width: 67%;
+  width: 69%;
   z-index: 4;
 }
 
