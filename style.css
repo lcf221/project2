@@ -380,6 +380,14 @@ textarea {
   }
 }
 
+/* Desktop / wide viewports only — matches phone layout tweak without affecting real devices */
+@media (min-width: 431px) {
+  .ms-sad {
+    bottom: 9%;
+    left: -11%;
+  }
+}
+
 /* ════════════════════════════════════════════════════════════
    INDIVIDUAL MOOD SCREENS  (Grow Lottie — ref: *.png, not embedded)
 ════════════════════════════════════════════════════════════ */
