@@ -216,45 +216,42 @@ textarea {
   transform-origin: 20% 15%;
 }
 
-/* ── Mood-select face buttons (ref screenshot: title + happy top; sad mid-left; meh mid-right;
-      stressed bottom-left; angry bottom-right; date bottom-left) ── */
+/* ── Mood-select face buttons (ref mood-select.png) ── */
 .ms-happy {
-  top: 2%;
-  left: auto;
-  right: -2%;
-  width: 62%;
+  top: 4%;
+  left: 30%;
+  width: 67%;
   z-index: 3;
 }
 
-.ms-sad {
-  top: 24%;
-  bottom: auto;
-  left: -11%;
-  width: 68%;
-  z-index: 2;
-}
-
-.ms-meh {
-  top: 36%;
-  left: 44%;
-  width: 74%;
-  z-index: 2;
-}
-
 .ms-stressed {
-  top: auto;
-  bottom: 13%;
+  top: 30%;
   left: -10%;
   width: 67%;
   z-index: 5;
 }
 
+.ms-meh {
+  top: 33%;
+  left: 45%;
+  width: 74%;
+  z-index: 2;
+}
+
+.ms-sad {
+  top: auto;
+  bottom: 8%;
+  left: -9%;
+  width: 69%;
+  z-index: 2;
+}
+
 .ms-angry {
   top: auto;
-  bottom: 13%;
+  bottom: -4%;
   right: -5%;
   left: auto;
-  width: 72%;
+  width: 75%;
   z-index: 4;
 }
 
@@ -331,13 +328,12 @@ textarea {
 
 /* Face button positions = same as .wl-* (welcome.png) — see rules above */
 
-/* Bottom-left date (clear of stressed + angry; matches screenshot) */
+/* Bottom-right date block (clear of lower characters) */
 .ms-date {
   position: absolute;
   bottom: max(3%, env(safe-area-inset-bottom, 0px));
-  left: 4%;
-  right: auto;
-  text-align: left;
+  right: 4%;
+  text-align: right;
   z-index: 20;
   pointer-events: none;
 }
@@ -369,7 +365,7 @@ textarea {
   }
 
   .ms-sad {
-    left: -14%;
+    left: -13%;
   }
 
   .ms-date-label {
