@@ -49,13 +49,15 @@ textarea {
 }
 
 /*
-  On wide viewports the shell stays 430px wide but was using full window height, so
-  percentage-based mood-select positions stretched vertically vs a real phone.
-  Cap height to ~phone aspect so the feeling screen matches mobile.
+  Wide viewports: without this, #app used max-width 430px and full window height, so
+  % layout (mood-select) didn’t match a typical phone (~390×844). Narrow the shell and
+  cap height to ~iPhone-class aspect. Phones (viewport ≤430px) are unchanged.
 */
 @media (min-width: 431px) {
   #app {
-    height: min(100vh, calc(min(100vw, 430px) * 2.15));
+    width: min(100vw, 390px);
+    /* ~19.5:9 logical — close to iPhone 14/15 portrait */
+    height: min(100vh, calc(min(100vw, 390px) * 2.17));
   }
 }
 
