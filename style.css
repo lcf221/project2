@@ -370,6 +370,13 @@ textarea {
   line-height: 1.25;
 }
 
+@media (max-width: 430px) {
+  .ms-sad {
+    bottom: 12%;
+    left: -7%;
+  }
+}
+
 /* ════════════════════════════════════════════════════════════
    INDIVIDUAL MOOD SCREENS  (Grow Lottie — ref: *.png, not embedded)
 ════════════════════════════════════════════════════════════ */
