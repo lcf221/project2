@@ -225,6 +225,19 @@ const MOODS = {
   },
 };
 
+/** Matches style.css #screen-happy … #screen-angry — status bar should follow the grow screen, not mood-select cream. */
+const MOOD_SCREEN_THEME_HEX = {
+  'screen-happy': '#FFF9E5',
+  'screen-sad': '#EAF4FF',
+  'screen-meh': '#FFF4FF',
+  'screen-stressed': '#FFEDE6',
+  'screen-angry': '#EEFFEB',
+};
+
+function isMoodGrowScreenId(id) {
+  return Object.prototype.hasOwnProperty.call(MOOD_SCREEN_THEME_HEX, id);
+}
+
 const MONTH_NAMES = [
   'January','February','March','April','May','June',
   'July','August','September','October','November','December',
@@ -352,7 +365,9 @@ function updateThemeColor() {
       : '#FFF5EA';
   } else {
     const moodKey = Object.keys(MOODS).find((k) => MOODS[k].screen === id);
-    if (moodKey) color = MOODS[moodKey].dayColor;
+    if (moodKey) {
+      color = MOOD_SCREEN_THEME_HEX[id] || MOODS[moodKey].dayColor;
+    }
   }
 
   meta.setAttribute('content', color);
@@ -367,7 +382,8 @@ function showScreen(id, afterShow) {
   const next = document.getElementById(id);
   if (!next) return;
   next.classList.add('active');
-  updateThemeColor();
+  /* Grow screens: keep mood-select theme until Grow Lottie completes — then updateThemeColor() runs there. */
+  if (!isMoodGrowScreenId(id)) updateThemeColor();
   /* Face Lotties must init after this screen is visible — opacity:0 during welcome blocks first paint */
   if (id === 'screen-mood-select') prepareMoodSelectFacesVisible();
   if (!afterShow) return;
@@ -639,6 +655,8 @@ function startMoodGrow(mood) {
   }, { once: true });
 
   moodGrowAnim.addEventListener('complete', () => {
+    /* After the grow animation (last frame held), match status bar to this screen’s bg — not before. */
+    updateThemeColor();
     moodAfterGrowTimer = setTimeout(() => {
       moodAfterGrowTimer = null;
       navigateToCalendar();
