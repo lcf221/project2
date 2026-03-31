@@ -371,6 +371,26 @@ function updateThemeColor() {
   }
 
   meta.setAttribute('content', color);
+
+  /* #app default (#fdf0e2) can peek at edges; iOS also keys off full-viewport bg with viewport-fit=cover. */
+  const appEl = document.getElementById('app');
+  if (appEl) {
+    if (id === 'screen-calendar' || id === 'screen-tracker') {
+      appEl.style.backgroundColor = color;
+    } else if (isMoodGrowScreenId(id)) {
+      appEl.style.backgroundColor = MOOD_SCREEN_THEME_HEX[id] || color;
+    } else if (id === 'screen-welcome' || id === 'screen-mood-select') {
+      appEl.style.backgroundColor = '#FFF5EA';
+    } else {
+      appEl.style.removeProperty('background-color');
+    }
+  }
+
+  if (window.matchMedia('(max-width: 430px)').matches) {
+    document.documentElement.style.backgroundColor = color;
+  } else {
+    document.documentElement.style.removeProperty('background-color');
+  }
 }
 
 function showScreen(id, afterShow) {
@@ -382,8 +402,7 @@ function showScreen(id, afterShow) {
   const next = document.getElementById(id);
   if (!next) return;
   next.classList.add('active');
-  /* Grow screens: keep mood-select theme until Grow Lottie completes — then updateThemeColor() runs there. */
-  if (!isMoodGrowScreenId(id)) updateThemeColor();
+  updateThemeColor();
   /* Face Lotties must init after this screen is visible — opacity:0 during welcome blocks first paint */
   if (id === 'screen-mood-select') prepareMoodSelectFacesVisible();
   if (!afterShow) return;
@@ -655,8 +674,6 @@ function startMoodGrow(mood) {
   }, { once: true });
 
   moodGrowAnim.addEventListener('complete', () => {
-    /* After the grow animation (last frame held), match status bar to this screen’s bg — not before. */
-    updateThemeColor();
     moodAfterGrowTimer = setTimeout(() => {
       moodAfterGrowTimer = null;
       navigateToCalendar();
@@ -903,6 +920,8 @@ document.addEventListener('DOMContentLoaded', () => {
   /* Update the date display immediately so it's ready when the
      welcome screen fades out and mood-select fades in */
   refreshDateDisplay();
+
+  updateThemeColor();
 
   initWelcomeWink();
 
