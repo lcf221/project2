@@ -253,14 +253,14 @@ textarea {
   top: auto;
   bottom: 3%;
   left: -18%;
-  width: 69%;
+  width: 65%;
   z-index: 2;
 }
 
 .ms-angry {
   top: auto;
   bottom: -4%;
-  right: -12%;
+  right: -20%;
   left: auto;
   width: 69%;
   z-index: 4;
@@ -339,13 +339,13 @@ textarea {
 
 /* Face button positions = same as .wl-* (welcome.png) — see rules above */
 
-/* Bottom-left date block (clear of lower characters) */
+/* Bottom-right date block (clear of lower characters) */
 .ms-date {
   position: absolute;
   bottom: max(3%, env(safe-area-inset-bottom, 0px));
-  left: 4%;
-  right: auto;
-  text-align: left;
+  right: 4%;
+  left: auto;
+  text-align: right;
   z-index: 20;
   pointer-events: none;
 }
@@ -353,7 +353,7 @@ textarea {
 .ms-date-label {
   display: block;
   font-family: var(--font-app);
-  font-size: clamp(1.22rem, 4.5vw, 1.48rem);
+  font-size: clamp(1.32rem, 5.1vw, 1.6rem);
   font-weight: 400;
   color: #1a0a00;
   letter-spacing: 0.08em;
@@ -364,7 +364,7 @@ textarea {
 .ms-date-value {
   display: block;
   font-family: var(--font-app);
-  font-size: clamp(1.26rem, 4.7vw, 1.55rem);
+  font-size: clamp(1.38rem, 5.4vw, 1.68rem);
   font-weight: 400;
   color: #1a0a00;
   text-transform: uppercase;
