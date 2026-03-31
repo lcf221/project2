@@ -263,6 +263,24 @@ textarea {
   overflow: visible;
 }
 
+/*
+  Desktop only: constrain the feeling screen to ~phone aspect inside full #app.
+  Does not shrink #app globally (nav + grow stay correct). Real phones unchanged.
+*/
+@media (min-width: 431px) {
+  #screen-mood-select {
+    inset: auto;
+    left: 50%;
+    top: 50%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+    width: min(100%, 390px);
+    height: min(100%, calc(390px * 2.17));
+    max-height: min(100vh, calc(390px * 2.17));
+  }
+}
+
 /* Staggered character stage */
 .ms-stage {
   position: absolute;
