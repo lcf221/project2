@@ -243,9 +243,9 @@ textarea {
 }
 
 .ms-meh {
-  top: 36%;
+  top: 34%;
   left: 45%;
-  width: 74%;
+  width: 78%;
   z-index: 2;
 }
 
@@ -259,10 +259,10 @@ textarea {
 
 .ms-angry {
   top: auto;
-  bottom: -8%;
-  right: -5%;
+  bottom: -2%;
+  right: -9%;
   left: auto;
-  width: 67%;
+  width: 72%;
   z-index: 4;
 }
 
@@ -339,12 +339,13 @@ textarea {
 
 /* Face button positions = same as .wl-* (welcome.png) — see rules above */
 
-/* Bottom-right date block (clear of lower characters) */
+/* Bottom-left date block (clear of lower characters) */
 .ms-date {
   position: absolute;
   bottom: max(3%, env(safe-area-inset-bottom, 0px));
-  right: 4%;
-  text-align: right;
+  left: 4%;
+  right: auto;
+  text-align: left;
   z-index: 20;
   pointer-events: none;
 }
