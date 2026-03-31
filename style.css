@@ -232,7 +232,7 @@ textarea {
 }
 
 .ms-meh {
-  top: 33%;
+  top: 36%;
   left: 45%;
   width: 74%;
   z-index: 2;
@@ -240,8 +240,8 @@ textarea {
 
 .ms-sad {
   top: auto;
-  bottom: 8%;
-  left: -9%;
+  bottom: 3%;
+  left: -18%;
   width: 69%;
   z-index: 2;
 }
@@ -357,20 +357,6 @@ textarea {
   color: #1a0a00;
   text-transform: uppercase;
   line-height: 1.25;
-}
-
-@media (max-width: 430px) {
-  .ms-stressed {
-    width: 69%;
-  }
-
-  .ms-date-label {
-    font-size: clamp(1.28rem, 5vw, 1.42rem);
-  }
-
-  .ms-date-value {
-    font-size: clamp(1.32rem, 5.2vw, 1.48rem);
-  }
 }
 
 /* ════════════════════════════════════════════════════════════
