@@ -232,26 +232,26 @@ textarea {
 }
 
 .ms-meh {
-  top: 32%;
-  left: 40%;
-  width: 88%;
+  top: 33%;
+  left: 45%;
+  width: 74%;
   z-index: 2;
 }
 
 .ms-sad {
   top: auto;
-  bottom: 6%;
-  left: -12%;
+  bottom: 8%;
+  left: -9%;
   width: 69%;
   z-index: 2;
 }
 
 .ms-angry {
   top: auto;
-  bottom: -8%;
+  bottom: -4%;
   right: -5%;
   left: auto;
-  width: 67%;
+  width: 72%;
   z-index: 4;
 }
 
@@ -357,6 +357,20 @@ textarea {
   color: #1a0a00;
   text-transform: uppercase;
   line-height: 1.25;
+}
+
+@media (max-width: 430px) {
+  .ms-stressed {
+    width: 69%;
+  }
+
+  .ms-date-label {
+    font-size: clamp(1.28rem, 5vw, 1.42rem);
+  }
+
+  .ms-date-value {
+    font-size: clamp(1.32rem, 5.2vw, 1.48rem);
+  }
 }
 
 /* ════════════════════════════════════════════════════════════
