@@ -243,8 +243,8 @@ textarea {
 }
 
 .ms-meh {
-  top: 34%;
-  left: 45%;
+  top: 32%;
+  left: 42%;
   width: 78%;
   z-index: 2;
 }
@@ -259,10 +259,10 @@ textarea {
 
 .ms-angry {
   top: auto;
-  bottom: -2%;
-  right: -9%;
+  bottom: -8%;
+  right: -5%;
   left: auto;
-  width: 72%;
+  width: 67%;
   z-index: 4;
 }
 
@@ -353,7 +353,7 @@ textarea {
 .ms-date-label {
   display: block;
   font-family: var(--font-app);
-  font-size: clamp(1.1rem, 4vw, 1.38rem);
+  font-size: clamp(1.22rem, 4.5vw, 1.48rem);
   font-weight: 400;
   color: #1a0a00;
   letter-spacing: 0.08em;
@@ -364,7 +364,7 @@ textarea {
 .ms-date-value {
   display: block;
   font-family: var(--font-app);
-  font-size: clamp(1.14rem, 4.1vw, 1.42rem);
+  font-size: clamp(1.26rem, 4.7vw, 1.55rem);
   font-weight: 400;
   color: #1a0a00;
   text-transform: uppercase;
