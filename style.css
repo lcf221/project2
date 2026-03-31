@@ -48,19 +48,6 @@ textarea {
   font-family: var(--font-app);
 }
 
-/*
-  Wide viewports: without this, #app used max-width 430px and full window height, so
-  % layout (mood-select) didn’t match a typical phone (~390×844). Narrow the shell and
-  cap height to ~iPhone-class aspect. Phones (viewport ≤430px) are unchanged.
-*/
-@media (min-width: 431px) {
-  #app {
-    width: min(100vw, 390px);
-    /* ~19.5:9 logical — close to iPhone 14/15 portrait */
-    height: min(100vh, calc(min(100vw, 390px) * 2.17));
-  }
-}
-
 /* Lets the welcome Lottie scale up without clipping at the phone edges */
 #app:has(#screen-welcome.active) {
   overflow: visible;
