@@ -48,6 +48,17 @@ textarea {
   font-family: var(--font-app);
 }
 
+/*
+  On wide viewports the shell stays 430px wide but was using full window height, so
+  percentage-based mood-select positions stretched vertically vs a real phone.
+  Cap height to ~phone aspect so the feeling screen matches mobile.
+*/
+@media (min-width: 431px) {
+  #app {
+    height: min(100vh, calc(min(100vw, 430px) * 2.15));
+  }
+}
+
 /* Lets the welcome Lottie scale up without clipping at the phone edges */
 #app:has(#screen-welcome.active) {
   overflow: visible;
