@@ -386,6 +386,10 @@ textarea {
     bottom: 9%;
     left: -11%;
   }
+
+  .ms-date {
+    bottom: max(1.5%, env(safe-area-inset-bottom, 0px));
+  }
 }
 
 /* ════════════════════════════════════════════════════════════
