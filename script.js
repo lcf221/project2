@@ -333,6 +333,31 @@ function seedMissingMoodsYearToDate() {
 /* ════════════════════════════════════════════════════════════
    SCREEN NAVIGATION
 ════════════════════════════════════════════════════════════ */
+
+/** Sync <meta name="theme-color"> with the active screen (status bar / browser chrome on mobile). */
+function updateThemeColor() {
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (!meta) return;
+
+  const active = document.querySelector('.screen.active');
+  const id = active?.id;
+  if (!id) return;
+
+  let color = '#FFF5EA';
+
+  if (id === 'screen-calendar' || id === 'screen-tracker') {
+    const todayMood = getMoodData()[todayStr()] || null;
+    color = (todayMood && MOODS[todayMood])
+      ? MOODS[todayMood].dayColor
+      : '#FFF5EA';
+  } else {
+    const moodKey = Object.keys(MOODS).find((k) => MOODS[k].screen === id);
+    if (moodKey) color = MOODS[moodKey].dayColor;
+  }
+
+  meta.setAttribute('content', color);
+}
+
 function showScreen(id, afterShow) {
   /* Mood-tinted screens: set inline colors before .active so first paint matches (no cream/yellow flash) */
   if (id === 'screen-calendar' || id === 'screen-tracker') {
@@ -342,6 +367,7 @@ function showScreen(id, afterShow) {
   const next = document.getElementById(id);
   if (!next) return;
   next.classList.add('active');
+  updateThemeColor();
   /* Face Lotties must init after this screen is visible — opacity:0 during welcome blocks first paint */
   if (id === 'screen-mood-select') prepareMoodSelectFacesVisible();
   if (!afterShow) return;
@@ -663,6 +689,11 @@ function applyTodayMoodThemeToCalAndTracker() {
   const trackerBar    = trackerScreen?.querySelector('.cal-nav-bar');
   if (trackerScreen) trackerScreen.style.backgroundColor = pageBg;
   if (trackerBar) trackerBar.style.backgroundColor = barBg;
+
+  const active = document.querySelector('.screen.active');
+  if (active && (active.id === 'screen-calendar' || active.id === 'screen-tracker')) {
+    updateThemeColor();
+  }
 }
 
 function renderCalendar() {
