@@ -3,6 +3,14 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Hide welcome copy before style.css paints (avoids BloomBuddy / welcome-back flash on load) -->
+    <style>
+      #welcome-text-wrap:not(.is-visible),
+      #welcome-brand:not(.is-visible) {
+        opacity: 0 !important;
+        visibility: hidden !important;
+      }
+    </style>
     <meta name="theme-color" content="#FFF5EA">
     <title>BloomBuddy</title>
     <!-- assets/favicon_io — all generated sizes -->

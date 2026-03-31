@@ -135,6 +135,7 @@ textarea {
   margin-bottom: clamp(-2.75rem, -8.5vmin, -1.25rem);
   z-index: 2;
   opacity: 0;
+  visibility: hidden;
   transform: translateY(22px) rotate(-1.5deg);
   pointer-events: none;
   transition: opacity 0.55s ease, transform 0.55s ease;
@@ -142,6 +143,7 @@ textarea {
 
 .welcome-text-wrap.is-visible {
   opacity: 1;
+  visibility: visible;
   transform: translateY(32px) rotate(-1.5deg);
 }
 
@@ -193,12 +195,14 @@ textarea {
   color: #5c443c;
   text-align: center;
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .welcome-brand.is-visible {
   opacity: 1;
+  visibility: visible;
   transform: translateX(-50%) translateY(0);
 }
 
